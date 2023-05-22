@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+
+    <main>
+        <h2>Customers</h2>
+
+        <div id="personalTable">
+            <h3>Personal Tax Course</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="personalCustomers">
+                    <!-- Customer rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="smallBusinessTable">
+            <h3>Small Business Tax Course</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="smallBusinessCustomers">
+                    <!-- Customer rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="corporateTable">
+            <h3>Corporate Tax Course</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="corporateCustomers">
+                    <!-- Customer rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch customers and populate the tables
+            fetchCustomers('personalCustomers', 'Personal Tax Course');
+            fetchCustomers('smallBusinessCustomers', 'Small Business Tax Course');
+            fetchCustomers('corporateCustomers', 'Corporate Tax Course');
+        });
+
+        function fetchCustomers(containerId, courseType) {
+            // Make an API call to retrieve customers based on the course type
+            // Replace the URL with your actual API endpoint
+            fetch(`/api/customers?courseType=${courseType}`)
+                .then(response => response.json())
+                .then(data => {
+                        const container = document.getElementById(containerId);
+                        container.innerHTML = ''; // Clear existing rows
+
+                        // Loop through the customers and create table rows
+                        data.forEach(customer => {
+                                    const row = document.createElement('tr');
+                                    const nameCell = document.createElement('td');
+                                    const emailCell = document.createElement('td');
+
+                                    nameCell.textContent = customer.name;
+                                    emailCell.textContent = customer.email;
+    </script>
+</body>
+
+</html>
